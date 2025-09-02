@@ -1,0 +1,7 @@
+import { reportWebVitals } from "web-vitals"; // Assuming 'web-vitals' library is used
+
+reportWebVitals((metric) => {
+  console.log(metric); // Log the metric to the console
+  // Alternatively, send the metric to an analytics endpoint
+  // sendToAnalytics(metric);
+});
