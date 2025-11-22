@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../../Python/resume-app"
+    },
+    {
+      "path": "../type-app"
+    },
+    {
+      "path": "../workbook-app"
+    }
+  ],
+  "settings": {}
+}

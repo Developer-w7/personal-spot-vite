@@ -40,8 +40,8 @@ const Router: FC<DummyProps> = () => {
       <Route path="/" element={<PersonalSpotLayout />}>
         <Route path="home" element={<PersonalSpotHome />} />
         <Route path="profile" element={<PersonalSpotProfile />} />
-        <Route path="resume" element={<PersonalSpotResumeManager />} />
         <Route path="resume_editor" element={<PersonalSpotResumeEditor />} />
+        <Route path="resume" element={<PersonalSpotResumeManager />} />
       </Route>
     </Routes>
   );

@@ -9,3 +9,45 @@
   /* border-radius: 8px; */
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.input-item {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.profile-form {
+  margin: 0 auto;
+}
+.form-wrapper {
+  padding: 0 20px;
+}
+.cm-flex {
+  display: flex;
+}
+.cm-flex-col {
+  flex-direction: column;
+}
+.cm-flex-row {
+  flex-direction: row;
+}
+.cm-gap-4 {
+  gap: 1rem; /* 16px if the root font size is 16px */
+}
+.cm-p-4 {
+  padding: 1rem; /* 16px if the root font size is 16px */
+}
+.cm-flex-item-1 {
+  flex: 1;
+}
+.cm-max-h-100 {
+  max-height: 100vh; /* Adjust as needed */
+}
+.cm-of-y-auto {
+  overflow-y: auto;
+}

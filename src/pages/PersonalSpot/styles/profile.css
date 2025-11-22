@@ -1,0 +1,17 @@
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.input-item {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.profile-form {
+  margin: 0 auto;
+}
+.form-wrapper {
+  padding: 0 20px;
+}

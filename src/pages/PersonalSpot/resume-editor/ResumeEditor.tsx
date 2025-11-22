@@ -1,11 +1,21 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect, useId } from "react";
 import TextField from "../../../components/common/atom/text-input";
 import TextAreaField from "../../../components/common/atom/text-area-input";
 
-import axiosPrivate from "../../../api/axios";
+import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-export default function PersonalSpotResumeEditor() {
+import { axiosPrivate } from "../../../api/axios";
+
+import "./style.css"; // Assuming you have a CSS file for styling
+
+export default function PersonalSpotProfile() {
   useEffect(() => {}, []);
+  const unique: string = useId();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -14,7 +24,7 @@ export default function PersonalSpotResumeEditor() {
     aboutYou: "",
     education: "",
     address: "",
-    skills: "",
+    skills: [],
     experience: "",
   });
 
@@ -44,6 +54,8 @@ export default function PersonalSpotResumeEditor() {
   //   skills: faker.lorem.words(5),
   //   experience: faker.lorem.sentence(),
   // });
+
+  //Plumber values
   useEffect(() => {
     setFormData({
       name: "John Doe",
@@ -52,10 +64,11 @@ export default function PersonalSpotResumeEditor() {
       aboutYou: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       education: "Bachelor of Science in Computer Science",
       address: "123 Main St, Anytown, USA",
-      skills: "JavaScript, React, Node.js",
+      skills: ["JavaScript", "React", "Node.js"],
       experience: "5 years of experience in web development",
     });
   }, []);
+
   const onChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -88,35 +101,40 @@ export default function PersonalSpotResumeEditor() {
 
     console.log("Form submitted");
   };
+
   const resetHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Form reset");
   };
   return (
-    <div>
-      <p>Profile</p>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          submitHandler(e);
-          // Handle form submission logic here
-          // For example, you can send the form data to an API or update the state
-          // console.log("Form submitted with data:", formData);
-          console.log("Form submitted");
-        }}
-        onReset={(e) => {
-          e.preventDefault();
-          resetHandler(e);
-          // Handle form reset logic here
-          // For example, you can clear the form data or reset the state
-          // console.log("Form reset with data:", formData);
-          // Reset the form fields to their initial values
-          e.currentTarget.reset();
-          // Optionally, you can also reset any state variables if needed
-          console.log("Form reset");
-        }}
-      >
-        {/* <TextField
+    <div className="cm-flex cm-max-h-100 cm-of-y-auto cm-flex-row">
+      <div className="cm-flex-item-1">
+        <div
+          className="profile-form form-wrapper"
+          style={{ padding: "0px 20px" }}
+        >
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              submitHandler(e);
+              // Handle form submission logic here
+              // For example, you can send the form data to an API or update the state
+              // console.log("Form submitted with data:", formData);
+              console.log("Form submitted");
+            }}
+            onReset={(e) => {
+              e.preventDefault();
+              resetHandler(e);
+              // Handle form reset logic here
+              // For example, you can clear the form data or reset the state
+              // console.log("Form reset with data:", formData);
+              // Reset the form fields to their initial values
+              e.currentTarget.reset();
+              // Optionally, you can also reset any state variables if needed
+              console.log("Form reset");
+            }}
+          >
+            {/* <TextField
         defaultValue=""
         label="Password"
         type="password"
@@ -145,166 +163,251 @@ export default function PersonalSpotResumeEditor() {
         onMouseUp={(e) => console.log("Mouse up:", e)}
         onMouseOver={(e) => console.log("Mouse over:", e)}
       /> */}
-        <TextField
-          defaultValue=""
-          value={formData.name}
-          label="Name"
-          type="text"
-          onChange={(event) => onChangeHandler(event)}
-          // onBlur={(e) => console.log("Blur event:", e.target.value)}
-          // onFocus={(e) => console.log("Focus event:", e.target.value)}
-          placeholder="Enter your username"
-          // required
-          autoFocus={false}
-          autoComplete="username"
-          maxLength={20}
-          minLength={3}
-          readOnly={false}
-          rows={1}
-          cols={30}
-          className="text-input"
-          style={{ border: "1px solid #ccc", padding: "8px" }}
-          id="profile-username-input"
-          name="name"
-        />
-        <TextField
-          defaultValue=""
-          value={formData.phoneNumber}
-          label="Phone Number"
-          type="number"
-          onChange={(event) => onChangeHandler(event)}
-          // onBlur={(e) => console.log("Blur event:", e.target.value)}
-          // onFocus={(e) => console.log("Focus event:", e.target.value)}
-          // placeholder="Enter your username"
-          // required
-          autoFocus={false}
-          autoComplete="username"
-          maxLength={20}
-          minLength={3}
-          readOnly={false}
-          rows={4}
-          cols={50}
-          className="text-input"
-          style={{ border: "1px solid #ccc", padding: "8px" }}
-          id="profile-username-input"
-          name="phoneNumber"
-        />
-        <TextField
-          defaultValue=""
-          value={formData.email}
-          label="Email"
-          type="email"
-          onChange={(event) => onChangeHandler(event)}
-          autoFocus={false}
-          autoComplete="username"
-          maxLength={20}
-          minLength={3}
-          readOnly={false}
-          rows={4}
-          cols={50}
-          className="text-input"
-          style={{ border: "1px solid #ccc", padding: "8px" }}
-          id="profile-username-input"
-          name="email"
-        />
-        <TextAreaField
-          defaultValue=""
-          value={formData.aboutYou}
-          label="About You"
-          onChange={(event) => onChangeHandler(event)}
-          required={false}
-          autoFocus={false}
-          maxLength={200}
-          minLength={10}
-          readOnly={false}
-          rows={4}
-          cols={30}
-          className="text-area-input"
-          style={{ border: "1px solid #ccc", padding: "8px", width: "100%" }}
-          id="profile-bio-input"
-          name="aboutYou"
-        />
-        <TextField
-          defaultValue=""
-          value={formData.education}
-          label="Education"
-          type="text"
-          onChange={(event) => onChangeHandler(event)}
-          autoFocus={false}
-          autoComplete="username"
-          maxLength={20}
-          minLength={3}
-          readOnly={false}
-          rows={1}
-          cols={30}
-          className="text-input"
-          style={{ border: "1px solid #ccc", padding: "8px" }}
-          id="profile-username-input"
-          name="education"
-        />
-        <TextField
-          defaultValue=""
-          value={formData.address}
-          label="Address"
-          type="text"
-          onChange={(event) => onChangeHandler(event)}
-          autoFocus={false}
-          autoComplete="username"
-          maxLength={20}
-          minLength={3}
-          readOnly={false}
-          rows={1}
-          cols={30}
-          className="text-input"
-          style={{ border: "1px solid #ccc", padding: "8px" }}
-          id="profile-username-input"
-          name="address"
-        />
-        <TextField
-          defaultValue=""
-          value={formData.skills}
-          label="Skills"
-          type="text"
-          onChange={(event) => onChangeHandler(event)}
-          autoFocus={false}
-          autoComplete="username"
-          maxLength={20}
-          minLength={3}
-          readOnly={false}
-          rows={1}
-          cols={30}
-          className="text-input"
-          style={{ border: "1px solid #ccc", padding: "8px" }}
-          id="profile-username-input"
-          name="skills"
-        />
-        <TextField
-          defaultValue=""
-          value={formData.experience}
-          label="Experience"
-          type="text"
-          onChange={(event) => onChangeHandler(event)}
-          autoFocus={false}
-          autoComplete="username"
-          maxLength={20}
-          minLength={3}
-          readOnly={false}
-          rows={1}
-          cols={30}
-          className="text-input"
-          style={{ border: "1px solid #ccc", padding: "8px" }}
-          id="profile-username-input"
-          name="experience"
-        />
-        {/* Add more fields as necessary */}
-        <button type="submit" className="submit-button">
-          Generate Resume
-        </button>
-        <button type="reset" className="reset-button">
-          Cancel
-        </button>
-        {/* Add more buttons or actions as necessary */}
-      </form>
+
+            <div className="input-group">
+              <div className="input-item">
+                <TextField
+                  defaultValue=""
+                  value={formData.name}
+                  label="Name"
+                  type="text"
+                  onChange={(event) => onChangeHandler(event)}
+                  // onBlur={(e) => console.log("Blur event:", e.target.value)}
+                  // onFocus={(e) => console.log("Focus event:", e.target.value)}
+                  placeholder="Enter your username"
+                  // required
+                  autoFocus={false}
+                  autoComplete="username"
+                  maxLength={20}
+                  minLength={3}
+                  readOnly={false}
+                  rows={1}
+                  cols={30}
+                  className="text-input"
+                  style={{ border: "1px solid #ccc", padding: "8px" }}
+                  id="profile-username-input"
+                  name="name"
+                />
+              </div>
+              <div className="input-item">
+                <TextField
+                  defaultValue=""
+                  value={formData.phoneNumber}
+                  label="Phone Number"
+                  type="number"
+                  onChange={(event) => onChangeHandler(event)}
+                  // onBlur={(e) => console.log("Blur event:", e.target.value)}
+                  // onFocus={(e) => console.log("Focus event:", e.target.value)}
+                  // placeholder="Enter your username"
+                  // required
+                  autoFocus={false}
+                  autoComplete="username"
+                  maxLength={20}
+                  minLength={3}
+                  readOnly={false}
+                  rows={4}
+                  cols={50}
+                  className="text-input"
+                  style={{ border: "1px solid #ccc", padding: "8px" }}
+                  id="profile-username-input"
+                  name="phoneNumber"
+                />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div className="input-item">
+                <TextAreaField
+                  defaultValue=""
+                  value={formData.aboutYou}
+                  label="About You"
+                  onChange={(event) => onChangeHandler(event)}
+                  // placeholder="Tell us about yourself"
+                  required={false}
+                  autoFocus={false}
+                  maxLength={200}
+                  minLength={10}
+                  readOnly={false}
+                  rows={4}
+                  cols={40}
+                  className="text-area-input"
+                  style={{
+                    border: "1px solid #ccc",
+                    padding: "8px",
+                    width: "100%",
+                    minHeight: "60px",
+                    overflowY: "auto",
+                    borderRadius: "4px",
+                  }}
+                  id="profile-bio-input"
+                  name="aboutYou"
+                />
+              </div>
+            </div>
+            <div className="input-group">
+              <div className="input-item">
+                <TextField
+                  defaultValue=""
+                  value={formData.email}
+                  label="Email"
+                  type="email"
+                  onChange={(event) => onChangeHandler(event)}
+                  // onBlur={(e) => console.log("Blur event:", e.target.value)}
+                  // onFocus={(e) => console.log("Focus event:", e.target.value)}
+                  // placeholder="Enter your username"
+                  // required
+                  autoFocus={false}
+                  autoComplete="username"
+                  maxLength={20}
+                  minLength={3}
+                  readOnly={false}
+                  rows={4}
+                  cols={50}
+                  className="text-input"
+                  style={{ border: "1px solid #ccc", padding: "8px" }}
+                  id="profile-username-input"
+                  name="email"
+                />
+              </div>
+              <div className="input-item">
+                <TextField
+                  defaultValue=""
+                  value={formData.education}
+                  label="Education"
+                  type="text"
+                  onChange={(event) => onChangeHandler(event)}
+                  // onBlur={(e) => console.log("Blur event:", e.target.value)}
+                  // onFocus={(e) => console.log("Focus event:", e.target.value)}
+                  // placeholder="Enter your username"
+                  // required
+                  autoFocus={false}
+                  autoComplete="username"
+                  maxLength={20}
+                  minLength={3}
+                  readOnly={false}
+                  rows={1}
+                  cols={30}
+                  className="text-input"
+                  style={{ border: "1px solid #ccc", padding: "8px" }}
+                  id="profile-username-input"
+                  name="education"
+                />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div className="input-item">
+                <TextField
+                  defaultValue=""
+                  value={formData.address}
+                  label="Address"
+                  type="text"
+                  onChange={(event) => onChangeHandler(event)}
+                  // onBlur={(e) => console.log("Blur event:", e.target.value)}
+                  // onFocus={(e) => console.log("Focus event:", e.target.value)}
+                  // placeholder="Enter your username"
+                  // required
+                  autoFocus={false}
+                  autoComplete="username"
+                  maxLength={20}
+                  minLength={3}
+                  readOnly={false}
+                  rows={1}
+                  cols={30}
+                  className="text-input"
+                  style={{ border: "1px solid #ccc", padding: "8px" }}
+                  id="profile-username-input"
+                  name="address"
+                />
+              </div>
+              <div className="input-item">
+                <label>
+                  <span>Skills</span>
+                </label>
+                {formData.skills &&
+                  formData.skills.map((skill, index) => (
+                    <Badge key={`${unique}-skill-${index}`} className="m-1">
+                      {skill}
+                    </Badge>
+                  ))}
+                <span className="cm-anchor" onClick={() => {}}>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <i className={`fa-solid fa-cog`}></i>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Edit</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </span>
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div className="input-item">
+                <TextField
+                  defaultValue=""
+                  value={formData.experience}
+                  label="Experience"
+                  type="text"
+                  onChange={(event) => onChangeHandler(event)}
+                  // onBlur={(e) => console.log("Blur event:", e.target.value)}
+                  // onFocus={(e) => console.log("Focus event:", e.target.value)}
+                  // placeholder="Enter your username"
+                  // required
+                  autoFocus={false}
+                  autoComplete="username"
+                  maxLength={20}
+                  minLength={3}
+                  readOnly={false}
+                  rows={1}
+                  cols={30}
+                  className="text-input"
+                  style={{ border: "1px solid #ccc", padding: "8px" }}
+                  id="profile-username-input"
+                  name="experience"
+                />
+              </div>
+              <span className="cm-anchor" onClick={() => {}}>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <i className={`fa-solid fa-cog`}></i>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Edit</p>
+                  </TooltipContent>
+                </Tooltip>
+              </span>
+            </div>
+
+            <div className="input-group">
+              <div className="input-item">
+                {/* Add more fields as necessary */}
+                <button
+                  style={{ width: "100%" }}
+                  type="submit"
+                  className="submit-button primary-button"
+                >
+                  Create
+                </button>
+              </div>
+              <div className="input-item">
+                <button
+                  style={{ width: "100%" }}
+                  type="reset"
+                  className="reset-button"
+                >
+                  Reset
+                </button>
+              </div>
+              {/* Add more buttons or actions as necessary */}
+            </div>
+          </form>
+        </div>
+      </div>
+      <div className="cm-flex-item-1">
+        <h2>Form Data Preview:</h2>
+      </div>
     </div>
   );
 }

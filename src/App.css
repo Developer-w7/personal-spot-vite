@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,44 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+label span {
+  color: rgb(174, 2, 2);
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+input {
+  width: 100%;
+  padding: 0.5em;
+  font-size: 1.2em;
+  font-weight: 400;
+  color: black;
+  border-radius: 0.25em;
+  border: 1px solid #ccc;
+}
+form textarea {
+  font-size: 1em;
+  font-weight: 400 !important;
+  min-height: 100px;
+  resize: vertical;
+  font-weight: 100;
+}
+
+.cm-anchor {
+  cursor: pointer;
+  color: #888;
+  margin-left: 8px;
+  font-weight: 400;
+  font-size: 0.9em;
+  transition: all 0.2s ease;
+}
+.cm-anchor:hover {
+  color: #000;
 }
