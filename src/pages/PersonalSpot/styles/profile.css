@@ -15,3 +15,11 @@
 .form-wrapper {
   padding: 0 20px;
 }
+.profile-listing .item {
+  margin: 10px 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: rgb(244, 239, 178);
+  cursor: pointer;
+}

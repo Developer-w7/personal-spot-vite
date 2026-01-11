@@ -20,8 +20,8 @@ export default function PersonalSpotLayout() {
       <hr />
       <div style={{ textAlign: "center", margin: "10px 0" }}>
         <NavLink to="home">Home</NavLink>
-        ||<NavLink to="profile">Profile</NavLink>||
-        <NavLink to="resume_editor">Resume Editor</NavLink>||
+        ||<NavLink to="profile_listing">Profile</NavLink>||
+        {/* <NavLink to="resume_editor">Resume Editor</NavLink>|| */}
         <NavLink to="resume">Resume</NavLink>||
         <NavLink to="profile">Settings</NavLink>
       </div>

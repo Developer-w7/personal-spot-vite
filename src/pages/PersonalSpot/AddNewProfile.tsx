@@ -1,13 +1,14 @@
-import { useRef, useState, useEffect, useId } from "react";
+import { useState, useEffect } from "react";
 import TextField from "../../components/common/atom/text-input";
 import TextAreaField from "../../components/common/atom/text-area-input";
-import { axiosPrivate } from "../../api/axios";
-
+// import { axiosPrivate } from "../../api/axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { faker } from "@faker-js/faker";
 import "./styles/profile.css"; // Assuming you have a CSS file for styling
 
-export default function PersonalSpotProfile() {
+export default function PersonalSpotAddNewProfilePage() {
   useEffect(() => {}, []);
-  const unique: string = useId();
+  const axiosPrivate = useAxiosPrivate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -20,44 +21,45 @@ export default function PersonalSpotProfile() {
     experience: "",
   });
 
-  useEffect(() => {
-    // Fetch user profile data from API or local storage
-    // const fetchProfileData = async () => {
-    //   try {
-    //     const response = await axiosPrivate.get("/user/profile");
-    //     setFormData(response.data);
-    //   } catch (error) {
-    //     console.error("Error fetching profile data:", error);
-    //   }
-    // };
-    // fetchProfileData();
-  }, []);
-
-  // Set form data with Faker or Hradcoded values for demonstration
-  // This can be replaced with actual data fetching logic
-  // const faker = require("faker");
-  // setFormData({
-  //   name: faker.name.findName(),
-  //   phoneNumber: faker.phone.phoneNumber(),
-  //   email: faker.internet.email(),
-  //   aboutYou: faker.lorem.paragraph(),
-  //   education: faker.lorem.sentence(),
-  //   address: faker.address.streetAddress(),
-  //   skills: faker.lorem.words(5),
-  //   experience: faker.lorem.sentence(),
-  // });
-
-  //Plumber values
+  //   Plumber values
   useEffect(() => {
     setFormData({
-      name: "John Doe",
-      phoneNumber: "1234567890",
-      email: "john@t.com",
-      aboutYou: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      education: "Bachelor of Science in Computer Science",
-      address: "123 Main St, Anytown, USA",
-      skills: "JavaScript, React, Node.js",
-      experience: "5 years of experience in web development",
+      name: faker.person.fullName(),
+      phoneNumber: faker.string.numeric(10),
+      email: faker.internet.email(),
+      aboutYou: faker.lorem.paragraph(),
+      education: faker.helpers.arrayElement([
+        "Bachelor of Science in Computer Science",
+        "Bachelor of Arts",
+        "Master of Science",
+        "Associate Degree",
+      ]),
+      address: `${faker.location.streetAddress()}, ${faker.location.city()}, ${faker.location.country()}`,
+      skills: faker.helpers
+        .arrayElements(
+          [
+            "JavaScript",
+            "TypeScript",
+            "React",
+            "Node.js",
+            "CSS",
+            "HTML",
+            "GraphQL",
+            "Docker",
+          ],
+          3
+        )
+        .join(", "),
+      experience: `${faker.number.int({
+        min: 1,
+        max: 15,
+      })} years of experience in ${faker.helpers.arrayElement([
+        "web development",
+        "software engineering",
+        "frontend",
+        "backend",
+        "full-stack",
+      ])}`,
     });
   }, []);
 
@@ -97,6 +99,16 @@ export default function PersonalSpotProfile() {
   const resetHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Form reset");
+    setFormData({
+      name: "",
+      phoneNumber: "",
+      email: "",
+      aboutYou: "",
+      education: "",
+      address: "",
+      skills: "",
+      experience: "",
+    });
   };
   return (
     <div className="profile-form form-wrapper" style={{ padding: "0px 20px" }}>

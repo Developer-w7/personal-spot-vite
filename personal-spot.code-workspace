@@ -1,16 +1,12 @@
 {
   "folders": [
     {
+      "name": "personal-spot",
       "path": "."
     },
     {
-      "path": "../../Python/resume-app"
-    },
-    {
-      "path": "../type-app"
-    },
-    {
-      "path": "../workbook-app"
+      "name": "test001",
+      "path": "../healo/packages/test001"
     }
   ],
   "settings": {}

@@ -1,7 +1,8 @@
 import { useRef, useState, useEffect, useId } from "react";
 import TextField from "../../../components/common/atom/text-input";
 import TextAreaField from "../../../components/common/atom/text-area-input";
-
+import MyDocument from "./Document";
+import ResumeDocument from "./sample-resume";
 import { Badge } from "@/components/ui/badge";
 import {
   Tooltip,
@@ -12,8 +13,17 @@ import {
 import { axiosPrivate } from "../../../api/axios";
 
 import "./style.css"; // Assuming you have a CSS file for styling
-
+import { useNavigate, useLocation } from "react-router-dom";
+import {
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  PDFViewer,
+} from "@react-pdf/renderer";
 export default function PersonalSpotProfile() {
+  const navigate = useNavigate();
   useEffect(() => {}, []);
   const unique: string = useId();
 
@@ -24,9 +34,28 @@ export default function PersonalSpotProfile() {
     aboutYou: "",
     education: "",
     address: "",
-    skills: [],
+    skills: "",
     experience: "",
   });
+  const location = useLocation();
+  const { profile } = location.state;
+
+  // Create styles
+  const styles = StyleSheet.create({
+    page: {
+      flexDirection: "row",
+      backgroundColor: "#E4E4E4",
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+      flexGrow: 1,
+    },
+  });
+  useEffect(() => {
+    console.log("Profile from state:", profile);
+    setFormData(profile);
+  }, [profile]);
 
   useEffect(() => {
     // Fetch user profile data from API or local storage
@@ -56,18 +85,18 @@ export default function PersonalSpotProfile() {
   // });
 
   //Plumber values
-  useEffect(() => {
-    setFormData({
-      name: "John Doe",
-      phoneNumber: "1234567890",
-      email: "john@t.com",
-      aboutYou: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      education: "Bachelor of Science in Computer Science",
-      address: "123 Main St, Anytown, USA",
-      skills: ["JavaScript", "React", "Node.js"],
-      experience: "5 years of experience in web development",
-    });
-  }, []);
+  // useEffect(() => {
+  //   setFormData({
+  //     name: "John Doe",
+  //     phoneNumber: "1234567890",
+  //     email: "john@t.com",
+  //     aboutYou: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  //     education: "Bachelor of Science in Computer Science",
+  //     address: "123 Main St, Anytown, USA",
+  //     skills: ["JavaScript", "React", "Node.js"],
+  //     experience: "5 years of experience in web development",
+  //   });
+  // }, []);
 
   const onChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -104,6 +133,16 @@ export default function PersonalSpotProfile() {
 
   const resetHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setFormData({
+      name: "",
+      phoneNumber: "",
+      email: "",
+      aboutYou: "",
+      education: "",
+      address: "",
+      skills: "",
+      experience: "",
+    });
     console.log("Form reset");
   };
   return (
@@ -325,7 +364,7 @@ export default function PersonalSpotProfile() {
                   <span>Skills</span>
                 </label>
                 {formData.skills &&
-                  formData.skills.map((skill, index) => (
+                  formData.skills.split(",").map((skill, index) => (
                     <Badge key={`${unique}-skill-${index}`} className="m-1">
                       {skill}
                     </Badge>
@@ -400,6 +439,18 @@ export default function PersonalSpotProfile() {
                   Reset
                 </button>
               </div>
+              <div className="input-item">
+                <button
+                  style={{ width: "100%" }}
+                  type="button"
+                  className="reset-button"
+                  onClick={() => {
+                    navigate("/profile_listing");
+                  }}
+                >
+                  Exit
+                </button>
+              </div>
               {/* Add more buttons or actions as necessary */}
             </div>
           </form>
@@ -407,6 +458,9 @@ export default function PersonalSpotProfile() {
       </div>
       <div className="cm-flex-item-1">
         <h2>Form Data Preview:</h2>
+        <PDFViewer width="100%" height="600px">
+          <ResumeDocument formData={formData} />
+        </PDFViewer>
       </div>
     </div>
   );

@@ -2,11 +2,14 @@ import { useEffect, useId } from "react";
 
 import CustomTile from "../../components/common/molecules/tile/tile";
 import "./styles/home.css"; // Assuming you have a CSS file for styling
+import useLogout from "../../hooks/useLogout";
+import { useNavigate } from "react-router-dom";
 
 export default function PersonalSpotHome() {
   useEffect(() => {}, []);
   const unique: string = useId();
-
+  const logout = useLogout();
+  const navigate = useNavigate();
   const tileMenuItems = [
     {
       title: "Resume",
@@ -21,7 +24,7 @@ export default function PersonalSpotHome() {
     {
       title: "Profile",
       icon: "fa-user",
-      link: "/personalspot/profile",
+      link: "/personalspot/profile_listing",
     },
     {
       title: "Settings",
@@ -29,6 +32,10 @@ export default function PersonalSpotHome() {
       link: "/personalspot/settings",
     },
   ];
+  const signOut = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   return (
     <div>
@@ -42,6 +49,9 @@ export default function PersonalSpotHome() {
             height="100px"
           />
         ))}
+      </div>
+      <div className="flexGrow">
+        <button onClick={signOut}>Sign Out</button>
       </div>
     </div>
   );
