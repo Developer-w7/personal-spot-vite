@@ -47,6 +47,12 @@ type ResumeProps = {
     subject: string;
     name: string;
     email: string;
+    aboutYou: string;
+    experience: string;
+    phoneNumber: string;
+    skills: string;
+    education: string;
+    address: string;
   };
 };
 const Header = (props: ResumeProps) => (

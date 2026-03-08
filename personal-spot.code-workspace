@@ -2,12 +2,14 @@
   "folders": [
     {
       "name": "personal-spot",
-      "path": "."
+      "path": ".",
     },
     {
-      "name": "test001",
-      "path": "../healo/packages/test001"
-    }
+      "path": "../../Python/resume-app",
+    },
+    {
+      "path": "../back_end_personal_spot",
+    },
   ],
-  "settings": {}
+  "settings": {},
 }

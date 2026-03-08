@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import TextField from "../../components/common/atom/text-input";
 import TextAreaField from "../../components/common/atom/text-area-input";
-// import { axiosPrivate } from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { faker } from "@faker-js/faker";
-import "./styles/profile.css"; // Assuming you have a CSS file for styling
-import { useLocation, useNavigate } from "react-router-dom";
+import "./styles/profile.css";
+import { useLocation } from "react-router-dom";
 
 export default function PersonalSpotProfileDetailsPage() {
   useEffect(() => {}, []);
@@ -30,7 +28,7 @@ export default function PersonalSpotProfileDetailsPage() {
   }, [profile]);
 
   const onChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     // console.log("Change event:", event.target.value);
     const { name, value } = event.target;
@@ -52,7 +50,7 @@ export default function PersonalSpotProfileDetailsPage() {
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        }
+        },
       );
       console.log(JSON.stringify(response?.data));
     } catch (err: any) {
@@ -82,53 +80,15 @@ export default function PersonalSpotProfileDetailsPage() {
         onSubmit={(e) => {
           e.preventDefault();
           submitHandler(e);
-          // Handle form submission logic here
-          // For example, you can send the form data to an API or update the state
-          // console.log("Form submitted with data:", formData);
           console.log("Form submitted");
         }}
         onReset={(e) => {
           e.preventDefault();
           resetHandler(e);
-          // Handle form reset logic here
-          // For example, you can clear the form data or reset the state
-          // console.log("Form reset with data:", formData);
-          // Reset the form fields to their initial values
           e.currentTarget.reset();
-          // Optionally, you can also reset any state variables if needed
           console.log("Form reset");
         }}
       >
-        {/* <TextField
-        defaultValue=""
-        label="Password"
-        type="password"
-        onChange={(v) => console.log(v)}
-        // onBlur={(e) => console.log("Blur event:", e.target.value)}
-        // onFocus={(e) => console.log("Focus event:", e.target.value)}
-        placeholder="Enter your password"
-        required
-        autoFocus
-        autoComplete="current-password"
-        maxLength={20}
-        minLength={8}
-        pattern=".{8,20}"
-        readOnly={false}
-        rows={1}
-        cols={30}
-        className="text-input"
-        style={{ border: "1px solid #ccc", padding: "8px" }}
-        id="profile-password-input"
-        name="profilePassword"
-        onKeyDown={(e) => console.log("Key down:", e.key)}
-        onKeyUp={(e) => console.log("Key up:", e.key)}
-        onKeyPress={(e) => console.log("Key press:", e.key)}
-        onClick={(e) => console.log("Input clicked:", e)}
-        onMouseDown={(e) => console.log("Mouse down:", e)}
-        onMouseUp={(e) => console.log("Mouse up:", e)}
-        onMouseOver={(e) => console.log("Mouse over:", e)}
-      /> */}
-
         <div className="input-group">
           <div className="input-item">
             <TextField
@@ -161,10 +121,6 @@ export default function PersonalSpotProfileDetailsPage() {
               label="Phone Number"
               type="number"
               onChange={(event) => onChangeHandler(event)}
-              // onBlur={(e) => console.log("Blur event:", e.target.value)}
-              // onFocus={(e) => console.log("Focus event:", e.target.value)}
-              // placeholder="Enter your username"
-              // required
               autoFocus={false}
               autoComplete="username"
               maxLength={20}
@@ -187,7 +143,6 @@ export default function PersonalSpotProfileDetailsPage() {
               value={formData.aboutYou}
               label="About You"
               onChange={(event) => onChangeHandler(event)}
-              // placeholder="Tell us about yourself"
               required={false}
               autoFocus={false}
               maxLength={200}
@@ -217,10 +172,6 @@ export default function PersonalSpotProfileDetailsPage() {
               label="Email"
               type="email"
               onChange={(event) => onChangeHandler(event)}
-              // onBlur={(e) => console.log("Blur event:", e.target.value)}
-              // onFocus={(e) => console.log("Focus event:", e.target.value)}
-              // placeholder="Enter your username"
-              // required
               autoFocus={false}
               autoComplete="username"
               maxLength={20}
@@ -241,10 +192,6 @@ export default function PersonalSpotProfileDetailsPage() {
               label="Education"
               type="text"
               onChange={(event) => onChangeHandler(event)}
-              // onBlur={(e) => console.log("Blur event:", e.target.value)}
-              // onFocus={(e) => console.log("Focus event:", e.target.value)}
-              // placeholder="Enter your username"
-              // required
               autoFocus={false}
               autoComplete="username"
               maxLength={20}
@@ -268,10 +215,6 @@ export default function PersonalSpotProfileDetailsPage() {
               label="Address"
               type="text"
               onChange={(event) => onChangeHandler(event)}
-              // onBlur={(e) => console.log("Blur event:", e.target.value)}
-              // onFocus={(e) => console.log("Focus event:", e.target.value)}
-              // placeholder="Enter your username"
-              // required
               autoFocus={false}
               autoComplete="username"
               maxLength={20}
@@ -292,10 +235,6 @@ export default function PersonalSpotProfileDetailsPage() {
               label="Skills"
               type="text"
               onChange={(event) => onChangeHandler(event)}
-              // onBlur={(e) => console.log("Blur event:", e.target.value)}
-              // onFocus={(e) => console.log("Focus event:", e.target.value)}
-              // placeholder="Enter your username"
-              // required
               autoFocus={false}
               autoComplete="username"
               maxLength={20}
@@ -319,10 +258,6 @@ export default function PersonalSpotProfileDetailsPage() {
               label="Experience"
               type="text"
               onChange={(event) => onChangeHandler(event)}
-              // onBlur={(e) => console.log("Blur event:", e.target.value)}
-              // onFocus={(e) => console.log("Focus event:", e.target.value)}
-              // placeholder="Enter your username"
-              // required
               autoFocus={false}
               autoComplete="username"
               maxLength={20}
