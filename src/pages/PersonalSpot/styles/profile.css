@@ -1,0 +1,25 @@
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.input-item {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.profile-form {
+  margin: 0 auto;
+}
+.form-wrapper {
+  padding: 0 20px;
+}
+.profile-listing .item {
+  margin: 10px 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: rgb(244, 239, 178);
+  cursor: pointer;
+}

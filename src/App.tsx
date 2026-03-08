@@ -13,11 +13,8 @@ interface DummyProps {
 const App: FC<DummyProps> = () => {
   return (
     <ErrorBoundaryWrapper>
-      {" "}
-      {/* MUI/STYLED/THEMING */}
       <ThemeOption themeName="light">
-        <h1 style={{ textAlign: "center" }}>Personal Spot</h1>
-        <hr /> {/* CUSTOM/THEMING */}
+        {/* CUSTOM/THEMING */}
         <BrowserRouter>
           <Router />
         </BrowserRouter>
