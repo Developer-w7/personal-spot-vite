@@ -1,0 +1,15 @@
+module.exports = {
+  moduleDirectories: ["./node_modules", "src"],
+  moduleNameMapper: {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+      "./__mocks__/fileMock.js",
+    "\\.(css|less|sass|scss)$": "identity-obj-proxy",
+  },
+  transform: {
+    "^.+\\.(js|jsx|ts|tsx)$": "ts-jest",
+  },
+  transformIgnorePatterns: ["node_modules/(?!axios)"],
+  setupFilesAfterEnv: ["./jest-setup.ts"],
+  testEnvironment: "jest-environment-jsdom",
+  preset: "ts-jest",
+};

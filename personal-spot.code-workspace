@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "name": "personal-spot",
+      "path": ".",
+    },
+    {
+      "path": "../../Python/resume-app",
+    },
+    {
+      "path": "../back_end_personal_spot",
+    },
+  ],
+  "settings": {},
+}
