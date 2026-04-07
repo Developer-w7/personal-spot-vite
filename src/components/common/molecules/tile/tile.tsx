@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, FC } from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import "./style.css"; // Assuming you have a CSS file for styling
 
 export default function CustomTile({
@@ -11,12 +11,18 @@ export default function CustomTile({
   width?: string;
   height?: string;
 }) {
+  const navigate = useNavigate();
   // This component renders a set of tiles based on the provided menu items.
   useEffect(() => {}, []);
+  const handleNavigate = (link) => {
+    // Implement navigation logic here, e.g., using react-router's useNavigate
+    console.log(`Navigating to ${link}`);
+    navigate(link);
+  };
 
   return (
     <div
-      onClick={() => console.log(`Clicked ${tileMenuItem.title}`)}
+      onClick={() => handleNavigate(tileMenuItem.link)}
       className="tile-wrapper"
       style={{ width, height }}
     >

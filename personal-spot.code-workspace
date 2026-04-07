@@ -10,6 +10,9 @@
     {
       "path": "../back_end_personal_spot",
     },
+    {
+      "path": "../workbook-app",
+    },
   ],
   "settings": {},
 }

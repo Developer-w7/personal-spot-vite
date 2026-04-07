@@ -12,24 +12,34 @@ export default function PersonalSpotHome() {
   const navigate = useNavigate();
   const tileMenuItems = [
     {
-      title: "Resume",
+      title: "Home",
       icon: "fa-file-edit",
-      link: "/personalspot/resume",
+      link: "/home",
     },
     {
-      title: "Task Board",
+      title: "Resume",
       icon: "fa-tasks",
-      link: "/personalspot/taskboard",
+      link: "/resume",
     },
     {
       title: "Profile",
       icon: "fa-user",
-      link: "/personalspot/profile_listing",
+      link: "/profile_listing",
     },
     {
       title: "Settings",
       icon: "fa-cog",
-      link: "/personalspot/settings",
+      link: "/settings",
+    },
+    {
+      title: "TODO",
+      icon: "fa-list",
+      link: "/to-do",
+    },
+    {
+      title: "Notes",
+      icon: "fa-sticky-note",
+      link: "/notes",
     },
   ];
   const signOut = async () => {

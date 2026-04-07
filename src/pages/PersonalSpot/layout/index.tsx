@@ -23,7 +23,8 @@ export default function PersonalSpotLayout() {
         ||<NavLink to="profile_listing">Profile</NavLink>||
         {/* <NavLink to="resume_editor">Resume Editor</NavLink>|| */}
         <NavLink to="resume">Resume</NavLink>||
-        <NavLink to="profile">Settings</NavLink>
+        <NavLink to="to-do">To-do</NavLink>||
+        <NavLink to="settings">Settings</NavLink>
       </div>
 
       <Outlet />

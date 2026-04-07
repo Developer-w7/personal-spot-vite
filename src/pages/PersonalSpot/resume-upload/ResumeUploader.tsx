@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, FC, useId } from "react";
+import { useRef, useState, useEffect, useId } from "react";
 import { axiosPrivate } from "../../../api/axios";
 import FileUploadField from "../../../components/common/atom/select-upload";
 import "./style.css";
@@ -43,7 +43,7 @@ export default function PersonalSpotResumeManager() {
     });
   }, []);
   const onChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     console.log("Change event:", event.target.value);
     const { name, value } = event.target;
@@ -65,7 +65,7 @@ export default function PersonalSpotResumeManager() {
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        }
+        },
       );
       console.log(JSON.stringify(response?.data));
     } catch (err: any) {

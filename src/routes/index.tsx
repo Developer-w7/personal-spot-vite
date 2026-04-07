@@ -28,6 +28,8 @@ import PersistLogin from "@/components/PersistLogin";
 import PersonalSpotProfileDetailsPage from "../pages/PersonalSpot/ProfileDetailsPage";
 import PersonalSpotProfileListingPage from "@/pages/PersonalSpot/ProfileListingPage";
 import PersonalSpotAddNewProfilePage from "@/pages/PersonalSpot/AddNewProfile";
+import TODO from "@/pages/PersonalSpot/to-do";
+import Notes from "@/pages/PersonalSpot/notes";
 
 type DummyProps = {
   number?: number;
@@ -80,6 +82,12 @@ const Router: FC<DummyProps> = () => {
           </Route>
           <Route element={<RequireAuth allowedRoles={[ROLES.Chess]} />}>
             <Route path="resume" element={<PersonalSpotResumeManager />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={[ROLES.Chess]} />}>
+            <Route path="/to-do" element={<TODO />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={[ROLES.Chess]} />}>
+            <Route path="/notes" element={<Notes />} />
           </Route>
         </Route>
         {/* catch all */}
